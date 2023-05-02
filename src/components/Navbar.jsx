@@ -1,13 +1,14 @@
-import React,{useState} from 'react';
+import React, { useState} from 'react';
 import {FaUserCircle} from 'react-icons/fa';
 import { Link } from "react-router-dom";
+
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
   return (
-    <header>
-        <nav className="container w-full mx-auto px-6 py-3">
-            <div className='flex flex-col md:flex-row md:justify-between md:items-center'>
+    <header className='bg-white'>
+        <nav className="container w-full mx-auto px-6 py-3 ">
+            <div className='flex flex-col md:flex-row md:justify-between md:items-center '>
                 <div className="flex justify-between items-center">
                     <div className='flex items-center'>
                         <Link
@@ -44,9 +45,9 @@ function Navbar() {
                         <button className='mr-2 md:mr-10 hover:cursor-pointer hover:shadow-md py-1'>
                             <span className='font-semibold text-xl'>Messages</span>
                         </button>
-                        <button className='md:place-self-center hover:cursor-pointer hover:shadow-md py-1'>
+                        <Link className="md:place-self-center hover:cursor-pointer hover:shadow-md py-1" to="/Profile">
                             <FaUserCircle className='w-8 h-8' />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div> 
