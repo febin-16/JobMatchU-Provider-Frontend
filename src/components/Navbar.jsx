@@ -1,13 +1,14 @@
-import React,{useState} from 'react';
-//import {FaUserCircle} from 'react-icons/fa';
+import React, { useState} from 'react';
+import {FaUserCircle} from 'react-icons/fa';
 import { Link } from "react-router-dom";
+
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
   return (
-    <header>
-        <nav className="container w-full mx-auto px-6 py-3">
-            <div className='flex flex-col md:flex-row md:justify-between md:items-center'>
+    <header className='bg-white'>
+        <nav className="container w-full mx-auto px-6 py-3 ">
+            <div className='flex flex-col md:flex-row md:justify-between md:items-center '>
                 <div className="flex justify-between items-center">
                     <div className='flex items-center'>
                         <Link
