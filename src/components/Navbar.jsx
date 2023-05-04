@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {FaUserCircle} from 'react-icons/fa';
+//import {FaUserCircle} from 'react-icons/fa';
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -45,7 +45,7 @@ function Navbar() {
                             <span className='font-semibold text-xl'>Messages</span>
                         </button>
                         <button className='md:place-self-center hover:cursor-pointer hover:shadow-md py-1'>
-                            <FaUserCircle className='w-8 h-8' />
+                            {/* <FaUserCircle className='w-8 h-8' /> */}
                         </button>
                     </div>
                 </div>
