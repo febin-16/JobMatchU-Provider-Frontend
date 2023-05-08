@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from "../constants/urls";
 export async function ProfileUpdate(user,data,value){
-    if(value==1)
-    {
+
         console.log(user);
         data={...data,username:user}
         console.log(data);
@@ -15,6 +14,4 @@ export async function ProfileUpdate(user,data,value){
             console.log(error);
             throw error;
         }
-    }
-    
 }

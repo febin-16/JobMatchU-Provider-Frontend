@@ -18,16 +18,9 @@ function Profile_Info(){
     };
 
     const [file, setFile]  = useState()
-    // const {user} = useContext(UserContext)
-
-    // function handleFile(event){
-    //     setFile(event.target.files[0])
-    //     // console.log(event.target.files[0])
-    // }
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Company_name is required"),
-        // c_email: Yup.string().required("Company email is required"),
         phone_number: Yup.string().required("Company contact number is required"),
         address: Yup.string().required("Company address is required"),
         description : Yup.string()
@@ -35,11 +28,8 @@ function Profile_Info(){
     });
 
     async function onSubmit(values, {setSubmitting, resetForm}) {
-        //console.log(values);
         try {
-            console.log(values);
             const username = localStorage.getItem("username");
-            console.log(username);
             await ProfileUpdate(username, values,1);
             alert("Profile Updated successful");
             localStorage.setItem('ProfileInfo',JSON.stringify(values))
