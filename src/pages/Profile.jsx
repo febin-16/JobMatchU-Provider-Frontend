@@ -17,7 +17,7 @@ const Profile = () => {
       className="min-h-screen w-full bg-gray-100 text-gray-700"
       x-data="layout"
     >
-      <Navbar />
+      
 
       <header className="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
         <div className="flex items-center space-x-2">

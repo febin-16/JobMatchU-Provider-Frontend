@@ -6,6 +6,7 @@ import {HiOutlineClipboardList} from "react-icons/hi";
 import {AiOutlineHeart} from "react-icons/ai";
 import Applicants_Info from './Applicants_Info';
 import Selected_Appl_Info from './Selected_Appl_Info';
+import { Link } from 'react-router-dom';
 
 // bg-gradient-to-r from-gray-400 to-gray-500
 // bg-zinc-400 bg-blend-color
@@ -13,7 +14,7 @@ import Selected_Appl_Info from './Selected_Appl_Info';
 
 function JobCard(){
 	// const [liked,setLiked] = useState(false);
-    const [clicked,setClicked] = useState("Profile")
+    //const [clicked,setClicked] = useState("Profile")
 
 
   return (
@@ -48,18 +49,18 @@ function JobCard(){
             <div className='flex flex-col justify-center'>
                 <div className=" place-self-center flex pt-2">
                     {/* {clicked ? < Applicants_Info/> :} */}
-                    <button className="bg-gray-900 rounded-full px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-gray-500 focus:outline-none" onClick={() => setClicked("Applicants")}>View Applicants</button>
-                    
+                    <Link to='/Profile/Applicants_Info'>
+                        <button className="bg-gray-900 rounded-full px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-gray-500 focus:outline-none">View Applicants</button>
+                    </Link>
                 </div>
                 <div className=" place-self-center flex pt-2">
-                    <button className="bg-gray-900 rounded-full px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-gray-500 focus:outline-none" >Selected Applicants</button>
+                    <Link to='/Profile/Selected_Applicants_Info'>
+                        <button className="bg-gray-900 rounded-full px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-gray-500 focus:outline-none" >Selected Applicants</button>
+
+                    </Link>
                 </div>
             </div>
 
-            {clicked=="Applicants" && 
-                <div><Applicants_Info /></div>
-                
-            }
 			
 		</div>
 

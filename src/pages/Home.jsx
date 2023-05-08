@@ -9,7 +9,6 @@ import Selected_Appl_Info from '../components/Selected_Appl_Info';
 function Home(){
   return (
     <div className='flex flex-col'>
-      <Navbar />
       <HeroSection />
       {/* <Profile /> */}
       {/* <Applicants_Info /> */}
