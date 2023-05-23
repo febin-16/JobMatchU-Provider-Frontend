@@ -3,8 +3,8 @@ import Profile_Info from '../components/Profile_Info'
 import { Link } from 'react-router-dom'
 import JobCard from '../components/JobCard'
 import Navbar from '../components/Navbar'
-import Selected_Appl_Info from '../components/Selected_Appl_Info'
-import Applicants_Info from '../components/Applicants_Info'
+import Selected_Appl_Info from '../components/Selected_ApplicantsCard'
+import Applicants_Info from '../components/ApplicantsCard'
 import { getJobDetails } from '../api/GetJobDetails'
 
 const Profile = () => {
@@ -12,11 +12,11 @@ const Profile = () => {
   const [prof, setProf] = useState("Profile");
   const [jobs,setJobs]= useState(null);
   useEffect(()=>{
-    async function getJobs(){
+    async function getJobs(){  //to get the jobs by this user which is got as return of getJobDetails
       try{
         const username = localStorage.getItem('username');
         const job = await getJobDetails(username);
-        console.log(job);
+        console.log("job details",job);
         setJobs(job);
       }
       catch(error)
