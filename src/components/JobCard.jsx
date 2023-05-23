@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 // bg-zinc-400 bg-blend-color
 // bg-gradient-to-l from-zinc-400 via-zinc-300 to-zinc-400
 
-function JobCard(){
+function JobCard({details}){
 	// const [liked,setLiked] = useState(false);
     //const [clicked,setClicked] = useState("Profile")
 
@@ -22,27 +22,22 @@ function JobCard(){
 		<div className="flex justify-between w-full min-h-[250px] h-auto md:h-[250px] border border-solid rounded-xl p-4 bg-gray-200 hover:shadow-md drop-shadow-md hover:shadow-gray-400">
             <div className=''>
                 <div className="flex justify-between items-center py-3 ">
-                    <h2 className="text-2xl font-bold text-gray-900 mr-4">Job Title</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mr-4">{details.title}</h2>
                 </div>
                 <div className=''>
-                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">Location</h3>
-                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">Job Type</h3>
-                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">Salary</h3>    
+                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.locationtype}</h3>
+                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.location}</h3>
+                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.stripend}</h3>    
                 </div>
                 <div className='flex flex-row flex-wrap space-x-2 pt-2'>
-					<div className='flex bg-gray-300 rounded'>
-						<HiOutlineClipboardList className='place-self-center'/>
-						<span>Tag 1</span>
-					</div>
-					<div className='flex bg-gray-300 rounded'>
-						<HiOutlineClipboardList className='place-self-center'/>
-						<span>Tag 2</span>
-					</div>
-					<div className='flex bg-gray-300 rounded'>
-						<HiOutlineClipboardList className='place-self-center'/>
-						<span>Tag 3</span>
-					</div>
-
+                    {details.tags.map((i) => {
+                        return(
+                            <div className='flex bg-gray-300 rounded'>
+						        <HiOutlineClipboardList className='place-self-center'/>
+						        <span>{i}</span>
+					        </div>
+                        );
+                    })}
 				</div>
             </div>
 			{/* w-fill h-fill */}

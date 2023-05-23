@@ -1,14 +1,31 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Profile_Info from '../components/Profile_Info'
 import { Link } from 'react-router-dom'
 import JobCard from '../components/JobCard'
 import Navbar from '../components/Navbar'
 import Selected_Appl_Info from '../components/Selected_Appl_Info'
 import Applicants_Info from '../components/Applicants_Info'
+import { getJobDetails } from '../api/GetJobDetails'
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [prof, setProf] = useState("Profile");
+  const [jobs,setJobs]= useState(null);
+  useEffect(()=>{
+    async function getJobs(){
+      try{
+        const username = localStorage.getItem('username');
+        const job = await getJobDetails(username);
+        console.log(job);
+        setJobs(job);
+      }
+      catch(error)
+      {
+        console.error(error);
+      }
+    }
+    getJobs();
+  },[])
   return (
     // <div>
     //   <Profile_Info />
@@ -97,7 +114,11 @@ const Profile = () => {
             {/* <div className={`${isOpen ? "hidden":"block"} w-full p-4 md:block`} ></div> */}
              {prof=="Jobs" && 
                 <div className={`${isOpen ? "hidden":"block"} w-full p-4 md:block`} >
-                    <JobCard />
+                  {jobs&&jobs.map((job)=>{
+                    return(
+                      <JobCard  details={job} key={job.id}/>
+                    );
+                  })}
                     {/* <Applicants_Info /> */}
                     {/* <Selected_Appl_Info /> */}
                 </div>
