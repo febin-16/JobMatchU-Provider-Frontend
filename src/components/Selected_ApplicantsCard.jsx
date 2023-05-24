@@ -10,8 +10,7 @@ import Rating from './Rating';
 // bg-gradient-to-l from-zinc-400 via-zinc-300 to-zinc-400
 
 function Selected_ApplicantsCard({details}){
-	const [liked,setLiked] = useState(false);
-
+	console.log("sel det: ",details);
     const [showModal,setShowModel] = useState(false);
     function handleClick(){
 		console.log("jdsoajdo");
@@ -91,7 +90,7 @@ function Selected_ApplicantsCard({details}){
 									<h1 className='text-xl text-gray-800 py-1 pb-6'>{details.student.job_description}</h1>								
 								</div>
 								<div className='flex flex-col'>
-									<Rating />
+									<Rating details={details}/>
 								</div>
 								
 								<div className="flex items-center justify-end p-6 border-t border-solid border-gray-400 rounded-b">

@@ -1,6 +1,6 @@
-import React,{useState, useEffect} from 'react'
-import Selected_ApplicantsCard from '../components/Selected_ApplicantsCard'
-import {GetSelectedApplDetails} from '../api/GetSelectedApplDetails'
+import React,{useState, useEffect} from 'react';
+import Selected_ApplicantsCard from '../components/Selected_ApplicantsCard';
+import {GetSelectedApplDetails} from '../api/GetSelectedApplDetails';
 import { useParams } from 'react-router-dom';
 
 const Selected_Appl_Info = () => {
@@ -23,6 +23,9 @@ const Selected_Appl_Info = () => {
   },[])
   return (
     <div>
+      <div className='h-[50px] w-full  flex justify-center bg-gray-300 rounded-md items-center'>
+          <h1 className='text-2xl font-sans font-bold text-gray-500'>Selected Applicants</h1>
+      </div>
       {selectedappls && selectedappls.map((selectedappl) => {
         return(
           <Selected_ApplicantsCard details={selectedappl} key={selectedappl.id}/>

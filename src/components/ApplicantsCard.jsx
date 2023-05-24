@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { BiMoney } from "react-icons/bi";
 import {BsBriefcaseFill} from "react-icons/bs";
 import {FcLike} from "react-icons/fc";
 import {HiOutlineClipboardList} from "react-icons/hi";
 import {AiOutlineHeart} from "react-icons/ai";
 import { ApplicationStatusUpdate } from '../api/ApplicationStatusUpdate';
+import { useParams } from 'react-router-dom';
+import { GetRatingDetails } from '../api/GetRatingDetails';
 
 
 // bg-gradient-to-r from-gray-400 to-gray-500
@@ -21,7 +23,6 @@ function ApplicantsCard({details}){
 		try{
 			const choice = window.confirm("Are you sure you want to accept?");
 			if(choice){
-				console.log("acc: ",accepted);
 				const data = {
 					applicant : details.applicant.id,
 					job : details.job.id,
@@ -59,6 +60,25 @@ function ApplicantsCard({details}){
 		console.log("model shown");
 		setShowModel(!showModal)
 	}
+
+
+	const [ratings,setRatings] = useState(null);
+	useEffect(()=>{
+		async function getRating(){
+		try{
+			console.log("id: ",details.applicant.id);
+			const student_id = details.applicant.id;
+			const rating = await GetRatingDetails(student_id);
+			console.log("rating details: ",rating);
+			setRatings(rating);
+		}
+		catch(error)
+		{
+			console.error(error);
+		}
+		}
+		getRating();
+	},[])
 	
 	return (
 		<div>
@@ -122,6 +142,38 @@ function ApplicantsCard({details}){
 								<div className='flex flex-col pl-6'>
 									<h1 className='text-xl text-gray-800 py-1 pt-2'>{details.applicant.job_title}</h1>
 									<h1 className='text-xl text-gray-800 py-1 pb-6'>{details.applicant.job_description}</h1>								
+								</div>
+								<div className='flex flex-col border-b solid border-gray-400 pb-2'>
+									<h1 className='text-2xl font-semibold text-gray-800 py-1'>Reviews and Ratings Of Previous Jobs</h1>
+								</div>
+								<div className='flex flex-col pl-6'>
+									{ratings.map((i,index) => {
+										return(
+											<>
+												<div>
+													<h1 className='text-2xl font-bold text-gray-800 pt-4' key={index}>{i.job.title}</h1>
+													<div className='pl-10'>
+														{[1,2,3,4,5].map((number) => (
+														<span
+															key={number}
+															style={{
+															cursor: 'pointer',
+															color: number <= i.rating ? 'gold' : 'gray',
+															fontSize : 36,
+															
+															}}
+														>
+															&#9733;
+														</span>
+														))}
+														<h1 className='text-xl text-gray-800 pb-3' key={index}>{i.comment}</h1>
+													</div>
+													
+												</div>
+												
+											</>
+										)
+									})}								
 								</div>
 
 								<div className='flex justify-end p-2 mb-2'>
