@@ -3,6 +3,7 @@ import Profile_Info from '../components/Profile_Info'
 import { Link } from 'react-router-dom'
 import JobCard from '../components/JobCard'
 import Navbar from '../components/Navbar'
+import Dashboard from '../components/Dashboard'
 import Selected_Appl_Info from '../components/Selected_Appl_Info'
 import Applicants_Info from '../components/Applicants_Info'
 
@@ -91,7 +92,7 @@ const Profile = () => {
             }  
             {prof=="Dashboard" && 
                 <div className="w-full p-4">
-                    Dashboard
+                    <Dashboard/>
                 </div>
             }  
             {/* <div className={`${isOpen ? "hidden":"block"} w-full p-4 md:block`} ></div> */}

@@ -55,9 +55,9 @@ function Profile_Info(){
 
     return (
         <div className='h-auto w-full flex flex-col'>
-            <div className='h-[50px] w-full flex justify-center bg-gray-300 rounded-md items-center'>
-                <h1 className='text-2xl font-sans font-bold text-gray-500'>Profile</h1>
-            </div>
+                <div className='h-[50px] w-full flex justify-center bg-gray-300 rounded-md items-center'>
+                    <h1 className='text-2xl font-sans font-bold text-gray-500'>Profile</h1>
+                </div>
             <div className='h-auto w-full flex flex-col justify-center min-px-5 md:px-40 py-5'>
                 
                 <Formik 
