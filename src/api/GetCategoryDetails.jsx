@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BASE_URL } from '../constants/urls';
 
 export async function getCategoryDetails(){
-    const url = BASE_URL + 'api/category';
+    const url = BASE_URL + 'api/subcategory';
     try{
         const response = await axios.get(url);
         return response.data;
