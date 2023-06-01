@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import CustomDatePicker from './Datepic';
 import {AiOutlinePlusCircle} from "react-icons/ai";
 import { getProviderId } from '../api/GetProviderId';
 import { JobPostUpdate } from '../api/JobPostUpdate';
+import { getCategoryDetails } from '../api/GetCategoryDetails';
 
 
 //import {AiOutlineCloudUpload, AiOutlineMinusCircle} from 'react-icons/ai';
 
 
 function Form1() {
+
+  const [categoryDetails, setCategoryDetails] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  useEffect(()=>{
+    async function getCategory(){  //to get the jobs by this user which is got as return of getJobDetails
+      try{
+        const username = localStorage.getItem('username');
+        const categoryDet = await getCategoryDetails();
+        console.log("Cat details",categoryDet);
+        setCategoryDetails(categoryDet);
+      }
+      catch(error)
+      {
+        console.error(error);
+      }
+    }
+    getCategory();
+  },[])
 
     const initialValues = {
         locationtype:"",
@@ -23,6 +43,8 @@ function Form1() {
         description:"",
         jobtype:"",
         location : '',
+        category : '',
+        subcategory : '',
 
     };
 
@@ -57,6 +79,8 @@ const locntypeoptions = [
   { value: 'on-site', label: 'on-site' },
 ];
 
+
+
 // const {user} = useContext(UserContext)
 // const [file, setFile]  = useState()
 
@@ -77,6 +101,8 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().required("Job Description required"),
   tag : Yup.string(),
   location : Yup.string().required('Location is required'),
+  category : Yup.string().required('Category is required'),
+  subcategory : Yup.string().required('Subcategory is required'),
 });
 
 
@@ -115,7 +141,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                 initialValues = {initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}>
-                    {({ isSubmitting }) => (
+                    {({setFieldValue, isSubmitting }) => (
                       
                        <div className='w-7/8'>
                       <Form>
@@ -157,6 +183,46 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                     <ErrorMessage name="locationtype" />
                                    </div>
                              </div> 
+                             {categoryDetails && 
+                                 <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
+                                 <div className='py-3 flex flex-col w-1/2'>
+                                   <label htmlFor="category" className='py-1'>Category</label>
+                                     <Field as="select" name="category" className="w-4/5" onChange={e => {
+                                      // setSelectedCategory(e.target.value);
+                                      setFieldValue('category',e.target.value);
+                                      setFieldValue('subcategory' , '');
+                                     }}>
+                                       <option value="">Select an option</option>
+                                       {categoryDetails.map((option) => (
+                                         <option key={option.category.name} value={option.category.name}>
+                                           {option.category.name}
+                                         </option>
+                                       ))}
+                                     </Field>
+                                     <ErrorMessage name="category" />
+                                     
+                                  </div>
+
+                                  {values.category && 
+                                      
+                                      <div className='py-3 flex flex-col w-1/2'>
+                                      <label htmlFor="subcategory" className='py-1'>SubCategory</label>
+                                          <Field as="select" name="subcategory" className="w-full">
+                                            <option value="">Select an option</option>
+                                            {categoryDetails[values.category].map((option) => (
+                                              <option key={option.name} value={option.name}>
+                                                {option.name}
+                                              </option>
+                                            ))}
+                                          </Field>
+                                          <ErrorMessage name="subcategory" />
+                                      </div>
+                                  
+                                  }
+
+                                 
+                              </div> 
+                             }
                            
                             <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                 <div className='w-1/2 flex flex-col'>
