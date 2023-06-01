@@ -1,5 +1,6 @@
 import React from 'react';
 import Employer_of_choice from '../assets/Employer_of_choice.png';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -33,9 +34,9 @@ const HeroSection = () => {
           </div>
       </section>
       <div className='bg-slate-600 mt-5 p-2 rounded-md hover:drop-shadow-md hover:bg-[#7d87bc]'>
-        <button className=''>
+        <Link to='/PostJob'>
             <h1 className='font-bold font-mono text-xl'>Post Job</h1>
-        </button>
+        </Link>
       </div>
     </div>
   )

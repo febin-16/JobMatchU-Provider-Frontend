@@ -1,0 +1,260 @@
+import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import CustomDatePicker from './Datepic';
+import {AiOutlinePlusCircle} from "react-icons/ai";
+import { getProviderId } from '../api/GetProviderId';
+import { JobPostUpdate } from '../api/JobPostUpdate';
+
+
+//import {AiOutlineCloudUpload, AiOutlineMinusCircle} from 'react-icons/ai';
+
+
+function Form1() {
+
+    const initialValues = {
+        locationtype:"",
+        hrs:"",
+        start_date:"",
+        end_date: "",
+        count: "",
+        stripend:"",
+        title:"",
+        description:"",
+        jobtype:"",
+        location : '',
+
+    };
+
+    const [tags,setTags] = useState([]);
+    const [input,setInput] = useState('');
+
+    function handleTagChange(event){
+        setInput(event.target.value);
+    }
+
+    
+
+    function handleTagSubmit(event){
+        event.preventDefault();
+        setTags([...tags,input]);
+        setInput("");
+        // setTags(event.target.value);
+        console.log("got : ",tags);
+    }
+
+const jobtypeoptions = [
+  { value: 'parttime', label: 'parttime' },
+  { value: 'internship', label: 'internship' },
+  { value: 'freelance', label: 'freelance' },
+  { value: 'fulltime', label: 'fulltime' },
+  { value: 'any', label: 'any'},
+];
+
+const locntypeoptions = [
+  { value: 'remote', label: 'remote' },
+  { value: 'hybrid', label: 'hybrid' },
+  { value: 'on-site', label: 'on-site' },
+];
+
+// const {user} = useContext(UserContext)
+// const [file, setFile]  = useState()
+
+
+    // function handleFile(event){
+    //     setFile(event.target.files[0])
+    // }
+
+const validationSchema = Yup.object().shape({
+    locationtype: Yup.string().required('Location type is required'),
+  jobtype: Yup.string().required('Job type is required'),
+  hrs: Yup.number().required("Hours per week is required"),
+  start_date:Yup.date().required("Start date is required").nullable(),
+  end_date:Yup.date().required("End date is required") ,
+  count:Yup.number().required("Number of people is required"),
+  stripend:Yup.number(),
+  title: Yup.string().required("Job Title required"),
+  description: Yup.string().required("Job Description required"),
+  tag : Yup.string(),
+  location : Yup.string().required('Location is required'),
+});
+
+
+async function onSubmit(values, {setSubmitting, resetForm}) {
+        //console.log(values);
+        try {
+            console.log(values);
+            values = {...values,tags : tags};
+            console.log("new values: ",values);
+
+            const username = localStorage.getItem("username");
+            const response = await getProviderId(username);
+            console.log("own id: ",response.id);
+            const owner = response.id;
+            values = {...values, owner : owner};
+            await JobPostUpdate(values);
+            // console.log(username);
+            // // await ProfileUpdate(username, values,1);
+            // // alert("Profile Updated successful");
+            // localStorage.setItem('JobPostInfo',JSON.stringify(values))
+            resetForm();
+          } catch (error) {
+            // alert("Registration closed");
+            console.log(error);
+          } finally {
+            setSubmitting(false);
+          }
+    }
+
+
+  return (
+    <div>
+      <div className='h-auto w-full flex flex-col justify-center px-5 md:px-40 py-5'>
+                
+                <Formik 
+                initialValues = {initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}>
+                    {({ isSubmitting }) => (
+                      
+                       <div className='w-7/8'>
+                      <Form>
+
+                            <h1 className='text-2xl font-serif font-bold text-gray-1000 pt-4 pb-2'>Basic Details</h1>
+                           
+                            <div className='h-auto w-full flex flex-col justify-between md:flex-row py-3'>
+                                <div className='w-full items-start  '>
+                                    <label className='text-lg font-serif  text-gray-700 mb-5'>Job Title</label>
+                                    
+                                        <Field type="text" name="title" className='outline outline-gray-300 rounded-sm px-2 s w-full focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
+                                        </Field>
+                                        <ErrorMessage style={{ color: 'red' }} name="title" component="div" />
+                                </div>
+                            </div>
+                             <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
+                                <div className='py-3 flex flex-col w-1/2'>
+                                  <label htmlFor="jobtype" className='py-1'>Job Type</label>
+                                    <Field as="select" name="jobtype" className="w-4/5">
+                                      <option value="">Select an option</option>
+                                      {jobtypeoptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                          {option.label}
+                                        </option>
+                                      ))}
+                                    </Field>
+                                    <ErrorMessage name="jobtype" />
+                                 </div>
+                                <div className='py-3 flex flex-col w-1/2'>
+                                <label htmlFor="locationtype" className='py-1'>Location type</label>
+                                    <Field as="select" name="locationtype" className="w-full">
+                                      <option value="">Select an option</option>
+                                      {locntypeoptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                          {option.label}
+                                        </option>
+                                      ))}
+                                    </Field>
+                                    <ErrorMessage name="locationtype" />
+                                   </div>
+                             </div> 
+                           
+                            <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
+                                <div className='w-1/2 flex flex-col'>
+                                    <label className='text-lg font-serif  text-gray-700 w-full'>How many hours per week</label>
+                                    <Field type="text" name="hrs" className='outline outline-gray-300 rounded-sm py-1 px-2 w-4/5 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
+                                    </Field>
+                                    <ErrorMessage style={{ color: 'red' }} name="hrs" component="div" />
+                                </div>
+                                <div className='w-1/2  flex flex-col'>
+                                    <label className='text-lg font-serif  text-gray-700 w-full'>Location</label>
+                                    <Field type="text" name="location" className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
+                                    </Field>
+                                    <ErrorMessage style={{ color: 'red' }} name="location" component="div" />
+                                </div>
+                                
+            
+                             
+                            </div>
+                            <div className='h-auto w-full flex flex-row justify-between item-stretch md:flex-row py-3'>
+                              <div className="w-1/2 flex flex-col ">
+                              <label className='text-lg font-serif  text-gray-700'>Start date</label>
+                              <Field component={CustomDatePicker} name="start_date" className="w-4/5 "/>
+                               <ErrorMessage name="end_date"  style={{ color: 'red' }}  component="div" />
+                                
+                              </div>
+                            
+                              <div className="w-1/2 flex flex-col">
+                                <label className='text-lg font-serif  text-gray-700'>End date</label>
+                                <Field component={CustomDatePicker} name="end_date" className="w-full"/>
+                               <ErrorMessage name="end_date"  style={{ color: 'red' }}  component="div" />
+                              </div>
+                            
+                            </div>
+                            <div className='h-auto w-full flex flex-col justify-between md:flex-row py-3'>
+                                <div className='w-full md:w-full items-start'>
+                                  <label className='text-lg font-serif  text-gray-700'>How many people needed </label>
+                                </div>
+                                <div className='md:w-full w-full items-start '>
+                                    <Field type="text" name="count" className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
+                                    </Field>
+                                    <ErrorMessage style={{ color: 'red' }} name="count" component="div" />
+                                </div>
+                            </div>
+                            <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
+                             
+                                    <label className='text-lg font-serif  text-gray-700 w-2/5'>Pay Rate</label>
+                                
+                                    <Field type="text" name="stripend" className=' w-1/2 outline outline-gray-300 rounded-sm py-1 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
+                                    </Field>
+                                    <ErrorMessage style={{ color: 'red' }} name="stripend" component="div" />
+                                    
+                              
+                            </div>
+                            <div className='w-full flex flex-col md:flex-row py-3 md:items-center'>
+                                    <label className='text-lg font-serif  text-gray-700 pr-4 '>Tags</label>
+                                    <div className='flex flex-row w-full'>
+                                        <Field type="text" name="tag" value={input} onChange={handleTagChange} className='outline outline-gray-300 rounded-sm py-1 px-2 w-full md:w-3/4 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
+                                        </Field>
+                                        <span className='p-2 place-self-center' onClick={handleTagSubmit}>
+                                            <AiOutlinePlusCircle className='place-self-center w-[30px] h-[30px]'/>
+                                        </span>
+                                    </div>
+                                    
+                                    
+                                    <div className='w-full flex flex-row flex-wrap px-2 mt-2 py-2'>
+                                        {tags.map((tag, index) => (
+                                            <div className='bg-gray-300 rounded-full p-2 mx-2 ' key={index}>{tag}</div>
+                                        ))}
+                                    </div>
+
+                            </div>
+                             <div className='h-auto w-full flex flex-col justify-between md:flex-col py-3'>
+                                <div className='w-full  md:3/5 items-start '>
+                                  <label className='text-lg font-serif  text-gray-700'>Job Description</label>
+                                </div>
+                                <div className='w-full md:3/5  items-start  '>
+                                    <Field type="text" name="description" className='outline outline-gray-300 rounded-sm py-1 px-2 w-full h-20 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
+                                    </Field>
+                                    <ErrorMessage style={{ color: 'red' }} name="description" component="div" />
+                                </div>
+                            </div>
+                           
+                    <div className='flow-root'>
+                    
+                    <button 
+                        type="submit" 
+                       disabled={isSubmitting}
+                        className='float-right bg-gray-900 rounded-full px-6 py-2 text-sm font-semibold text-slate-200 text-xl hover:bg-slate-600'>
+                        continue
+                    </button>
+                      </div>
+                       </Form>
+                      </div>
+                    )}
+                </Formik>
+            </div>
+    </div>
+  )
+}
+
+export default Form1;

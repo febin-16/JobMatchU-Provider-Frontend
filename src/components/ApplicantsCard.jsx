@@ -21,7 +21,7 @@ function ApplicantsCard({details}){
 
 	async function handleAccept(){
 		try{
-			const choice = window.confirm("Are you sure you want to accept?");
+			const choice = window.confirm("Are you sure you want to accept?( Once accepted, email will be sent to the applicant)");
 			if(choice){
 				const data = {
 					applicant : details.applicant.id,
@@ -41,7 +41,6 @@ function ApplicantsCard({details}){
 	}
 	async function handleReject(){
 		try{
-			console.log("rej: ",rejected);
 			const data = {
 				applicant : details.applicant.id,
 				job : details.job.id,

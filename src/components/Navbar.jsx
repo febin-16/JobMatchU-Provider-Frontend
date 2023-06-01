@@ -97,12 +97,12 @@ function Navbar() {
                 } `}
                 >
                     <div className="flex flex-col md:flex-row items-center">
-                        <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1'>
-                            <span className='font-semibold text-xl'>Notifications</span>
-                        </button>
-                        <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1'>
+                        <Link className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1' to='/PostJob'>
+                            <span className='font-semibold text-xl'>Post Job</span>
+                        </Link>
+                        {/* <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1'>
                             <span className='font-semibold text-xl'>Messages</span>
-                        </button>
+                        </button> */}
                         <Link className="mr-2 md:mr-7 md:place-self-center hover:cursor-pointer hover:shadow-md py-1" to="/Profile">
                             <FaUserCircle className='w-8 h-8' />
                         </Link>
