@@ -31,7 +31,7 @@ function Profile_Info(){
         try {
             const username = localStorage.getItem("username");
             await ProfileUpdate(username, values,1);
-            alert("Profile Updated successful");
+            alert("Profile Updated successfully");
             localStorage.setItem('ProfileInfo',JSON.stringify(values))
             resetForm();
           } catch (error) {
