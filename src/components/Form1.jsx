@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import CustomDatePicker from './Datepic';
 import {AiOutlinePlusCircle} from "react-icons/ai";
+import { getProviderId } from '../api/GetProviderId';
+import { JobPostUpdate } from '../api/JobPostUpdate';
 
 
 //import {AiOutlineCloudUpload, AiOutlineMinusCircle} from 'react-icons/ai';
@@ -84,11 +86,17 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
             console.log(values);
             values = {...values,tags : tags};
             console.log("new values: ",values);
+
             const username = localStorage.getItem("username");
-            console.log(username);
-            // await ProfileUpdate(username, values,1);
-            // alert("Profile Updated successful");
-            localStorage.setItem('JobPostInfo',JSON.stringify(values))
+            const response = await getProviderId(username);
+            console.log("own id: ",response.id);
+            const owner = response.id;
+            values = {...values, owner : owner};
+            await JobPostUpdate(values);
+            // console.log(username);
+            // // await ProfileUpdate(username, values,1);
+            // // alert("Profile Updated successful");
+            // localStorage.setItem('JobPostInfo',JSON.stringify(values))
             resetForm();
           } catch (error) {
             // alert("Registration closed");
