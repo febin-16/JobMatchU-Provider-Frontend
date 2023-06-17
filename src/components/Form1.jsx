@@ -229,7 +229,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                            
                             <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                 <div className='w-1/2 flex flex-col'>
-                                    <label className='text-lg font-serif  text-gray-700 w-full'>How many hours per week</label>
+                                    <label className='text-lg font-serif  text-gray-700 w-full'>Hours per week</label>
                                     <Field type="text" name="hrs" className='outline outline-gray-300 rounded-sm py-1 px-2 w-4/5 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
                                     </Field>
                                     <ErrorMessage style={{ color: 'red' }} name="hrs" component="div" />

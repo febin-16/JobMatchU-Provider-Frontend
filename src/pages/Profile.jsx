@@ -122,12 +122,15 @@ const Profile = () => {
                       <JobCard  details={job} key={job.id}/>
                     );
                   })}
-                    {/* <Applicants_Info /> */}
-                    {/* <Selected_Appl_Info /> */}
                 </div>
             } 
             </div>
+
+            
+
     </main>
+
+    
   )
 }
 
