@@ -44,7 +44,6 @@ function Form1() {
         jobtype:"",
         location : '',
         category : '',
-        subcategory : '',
 
     };
 
@@ -102,22 +101,23 @@ const validationSchema = Yup.object().shape({
   tag : Yup.string(),
   location : Yup.string().required('Location is required'),
   category : Yup.string().required('Category is required'),
-  subcategory : Yup.string().required('Subcategory is required'),
 });
 
 
 async function onSubmit(values, {setSubmitting, resetForm}) {
         //console.log(values);
         try {
-            console.log(values);
+          console.log(selectedCategory)
+           // console.log(values);
             values = {...values,tags : tags};
+            values = {...values,subcategory:selectedCategory[0].id}
             console.log("new values: ",values);
-
             const username = localStorage.getItem("username");
             const response = await getProviderId(username);
-            console.log("own id: ",response.id);
+          //  console.log("own id: ",response.id);
             const owner = response.id;
-            values = {...values, owner : owner};
+            values = {...values, username: username};
+            delete values.category
             await JobPostUpdate(values);
             // console.log(username);
             // // await ProfileUpdate(username, values,1);
@@ -188,10 +188,8 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                  <div className='py-3 flex flex-col w-1/2'>
                                    <label htmlFor="category" className='py-1'>Category</label>
                                      <Field  as="select" name="category" className="w-4/5" onChange={e => {
-                                       //setSelectedCategory(e.target.value);
                                        const id = categoryDetails.filter((item)=>item.name==e.target.value)
                                        setSelectedCategory(id);
-                                       console.log("id",id);
                                       setFieldValue('category',e.target.value);
                                     
                                      }}>
@@ -205,24 +203,6 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                      <ErrorMessage name="category" />
                                      
                                   </div>
-
-                                  {//values.category && 
-                                      
-                                  //     <div className='py-3 flex flex-col w-1/2'>
-                                  //     <label htmlFor="subcategory" className='py-1'>SubCategory</label>
-                                  //         <Field as="select" name="subcategory" className="w-full">
-                                  //           <option value="">Select an option</option>
-                                  //           {categoryDetails[values.category].map((option) => (
-                                  //             <option key={option.name} value={option.name}>
-                                  //               {option.name}
-                                  //             </option>
-                                  //           ))}
-                                  //         </Field>
-                                  //         <ErrorMessage name="subcategory" />
-                                  //     </div>
-                                  
-                                  }
-
                                  
                               </div> 
                              }
