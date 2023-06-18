@@ -6,7 +6,7 @@ const PostJob=()=>{
 
 
   return (
-    <div className='min-h-screen bg-blue-100'>
+    <div className='min-h-screen bg-gray-200'>
        <Form1 />
     </div>
      );
