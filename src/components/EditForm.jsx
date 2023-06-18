@@ -6,15 +6,20 @@ import {AiOutlinePlusCircle} from "react-icons/ai";
 import { getProviderId } from '../api/GetProviderId';
 import { JobPostUpdate } from '../api/JobPostUpdate';
 import { getCategoryDetails } from '../api/GetCategoryDetails';
-
+import { EditJobUpdate } from '../api/EditJobUpdate';
+import {RxCrossCircled} from 'react-icons/rx';
 
 //import {AiOutlineCloudUpload, AiOutlineMinusCircle} from 'react-icons/ai';
 
 
-function Form1() {
+function EditForm({details}) {
 
   const [categoryDetails, setCategoryDetails] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [category, setCategory] = useState(null);
+  const [jobDetails,setJobDetails] = useState();
+  let cat;
+
 
   useEffect(()=>{
     async function getCategory(){  //to get the jobs by this user which is got as return of getJobDetails
@@ -23,6 +28,13 @@ function Form1() {
         const categoryDet = await getCategoryDetails();
         console.log("Cat details",categoryDet);
         setCategoryDetails(categoryDet);
+		    console.log("kitti det: ",details);
+		    setJobDetails(details[0]);
+		    // console.log("kitti: ",jobDetails);
+        cat = categoryDet.filter((item)=>item.id==details[0].subcategory);
+        setCategory(cat);
+        console.log(cat[0].name);
+        
       }
       catch(error)
       {
@@ -30,31 +42,29 @@ function Form1() {
       }
     }
     getCategory();
-  },[])
+  },[cat])
 
     const initialValues = {
-        locationtype:"",
-        hrs:"",
-        start_date:"",
-        end_date: "",
-        count: "",
-        stripend:"",
-        title:"",
-        description:"",
-        jobtype:"",
-        location : '',
-        category : '',
+        locationtype: details[0].locationtype ,
+        hrs: details[0].hrs,
+        start_date: '',
+        end_date: '',
+        count: details[0].count,
+        stripend: details[0].stripend,
+        title: details[0].title ,
+        description: details[0].description,
+        jobtype: details[0].jobtype,
+        location : details[0].location,
+      //  category : '',
 
     };
 
-    const [tags,setTags] = useState([]);
+    const [tags,setTags] = useState(details[0].tags);
     const [input,setInput] = useState('');
 
     function handleTagChange(event){
         setInput(event.target.value);
     }
-
-    
 
     function handleTagSubmit(event){
         event.preventDefault();
@@ -62,6 +72,13 @@ function Form1() {
         setInput("");
         // setTags(event.target.value);
         console.log("got : ",tags);
+    }
+
+    function handleTagRemove(index){
+      const updatedTags = [...tags];
+      updatedTags.splice(index, 1);
+      setTags(updatedTags);
+      console.log("up tags",tags);
     }
 
 const jobtypeoptions = [
@@ -79,15 +96,6 @@ const locntypeoptions = [
 ];
 
 
-
-// const {user} = useContext(UserContext)
-// const [file, setFile]  = useState()
-
-
-    // function handleFile(event){
-    //     setFile(event.target.files[0])
-    // }
-
 const validationSchema = Yup.object().shape({
     locationtype: Yup.string().required('Location type is required'),
   jobtype: Yup.string().required('Job type is required'),
@@ -100,38 +108,37 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().required("Job Description required"),
   tag : Yup.string(),
   location : Yup.string().required('Location is required'),
-  category : Yup.string().required('Category is required'),
+  category : Yup.string(),
 });
 
 
 async function onSubmit(values, {setSubmitting, resetForm}) {
-        //console.log(values);
         try {
-          console.log(selectedCategory)
+          console.log("sel cat: ",selectedCategory);
+          if(selectedCategory==''){
+            values = {...values, subcategory: category[0].id}
+          }
+          else {
+            values = {...values, subcategory:selectedCategory[0].id}
+          }
            // console.log(values);
-            values = {...values,tags : tags};
-            values = {...values,subcategory:selectedCategory[0].id}
+            values = {...values, tags : tags};
+            values = {...values, id : details[0].id}
             console.log("new values: ",values);
             const username = localStorage.getItem("username");
             const response = await getProviderId(username);
-            let profileInfo;
-            let profil = localStorage.getItem("ProfileInfo");
           //  console.log("own id: ",response.id);
-            const owner = response.id;
-            console.log("profile: ",profil);
+            // const owner = response.id;
             values = {...values, username: username};
-            if(profil == null){
-              profileInfo = '';
-              alert('Please Update Your Profile');
-            }
-            else{
-              profileInfo = JSON.parse(profil);
-              delete values.category
-              await JobPostUpdate(values);
-              resetForm();
-            }
+            delete values.category
+            await EditJobUpdate(values);
+            // console.log(username);
+            // // await ProfileUpdate(username, values,1);
+            // // alert("Profile Updated successful");
+            // localStorage.setItem('JobPostInfo',JSON.stringify(values))
+            resetForm();
           } catch (error) {
-            alert("Job Posting Failed");
+            // alert("Registration closed");
             console.log(error);
           } finally {
             setSubmitting(false);
@@ -166,7 +173,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                              <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                 <div className='py-3 flex flex-col w-1/2'>
                                   <label htmlFor="jobtype" className='py-1'>Job Type</label>
-                                    <Field as="select" name="jobtype" className="w-4/5">
+                                    <Field as="select" name="jobtype" className="outline outline-gray-300 rounded-sm py-1 px-2 w-4/5 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500">
                                       <option value="">Select an option</option>
                                       {jobtypeoptions.map((option) => (
                                         <option key={option.value} value={option.value}>
@@ -174,11 +181,11 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                         </option>
                                       ))}
                                     </Field>
-                                    <ErrorMessage name="jobtype" style={{ color: 'red' }} component="div" />
+                                    <ErrorMessage name="jobtype" />
                                  </div>
                                 <div className='py-3 flex flex-col w-1/2'>
                                 <label htmlFor="locationtype" className='py-1'>Location type</label>
-                                    <Field as="select" name="locationtype" className="w-full">
+                                    <Field as="select" name="locationtype" className="outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500">
                                       <option value="">Select an option</option>
                                       {locntypeoptions.map((option) => (
                                         <option key={option.value} value={option.value}>
@@ -186,27 +193,27 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                         </option>
                                       ))}
                                     </Field>
-                                    <ErrorMessage name="locationtype" style={{ color: 'red' }} component="div" />
+                                    <ErrorMessage name="locationtype" />
                                    </div>
                              </div> 
                              {categoryDetails && 
                                  <div  className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                  <div className='py-3 flex flex-col w-1/2'>
                                    <label htmlFor="category" className='py-1'>Category</label>
-                                     <Field  as="select" name="category" className="w-4/5" onChange={e => {
+                                     <Field  as="select" name="category" className="outline outline-gray-300 rounded-sm py-1 px-2 w-4/5 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500" onChange={e => {
                                        const id = categoryDetails.filter((item)=>item.name==e.target.value)
                                        setSelectedCategory(id);
                                       setFieldValue('category',e.target.value);
                                     
                                      }}>
-                                       <option value="">Select an option</option>
+                                       <option>{category[0].name}</option>
                                        {categoryDetails.map((option) => (
                                          <option key={option.id} value={option.name}>
                                            {option.name}
                                          </option>
                                        ))}
                                      </Field>
-                                     <ErrorMessage name="category" style={{ color: 'red' }} component="div" />
+                                     <ErrorMessage style={{ color: 'red' }} name="category" component="div" />
                                      
                                   </div>
                                  
@@ -233,14 +240,14 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                             <div className='h-auto w-full flex flex-row justify-between item-stretch md:flex-row py-3'>
                               <div className="w-1/2 flex flex-col ">
                               <label className='text-lg font-serif  text-gray-700'>Start date</label>
-                              <Field component={CustomDatePicker} name="start_date" className="w-4/5 "/>
+                              <Field component={CustomDatePicker} name="start_date" className="outline outline-gray-300 rounded-sm py-1 px-2 w-4/5 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="start_date"  style={{ color: 'red' }}  component="div" />
                                 
                               </div>
                             
                               <div className="w-1/2 flex flex-col">
                                 <label className='text-lg font-serif  text-gray-700'>End date</label>
-                                <Field component={CustomDatePicker} name="end_date" className="w-full"/>
+                                <Field component={CustomDatePicker} name="end_date" className="outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500"/>
                                <ErrorMessage name="end_date"  style={{ color: 'red' }}  component="div" />
                               </div>
                             
@@ -278,7 +285,14 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                     
                                     <div className='w-full flex flex-row flex-wrap px-2 mt-2 py-2'>
                                         {tags.map((tag, index) => (
-                                            <div className='bg-gray-300 rounded-full p-2 mx-2 ' key={index}>{tag}</div>
+                                            <div className='bg-gray-300 flex justify-between rounded-xl mx-2' key={index}>
+                                              <div className='p-2'>
+                                                <h1 className=''>{tag}</h1>
+                                              </div>
+                                              <div onClick={() => handleTagRemove(index)}>
+                                                <RxCrossCircled />
+                                              </div>
+                                            </div>
                                         ))}
                                     </div>
 
@@ -300,7 +314,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                         type="submit" 
                        disabled={isSubmitting}
                         className='float-right bg-gray-900 rounded-full px-6 py-2 text-sm font-semibold text-slate-200 text-xl hover:bg-slate-600'>
-                        continue
+                        Submit
                     </button>
                       </div>
                        </Form>
@@ -312,4 +326,4 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
   )
 }
 
-export default Form1;
+export default EditForm;

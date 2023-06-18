@@ -35,7 +35,7 @@ function Profile_Info(){
             localStorage.setItem('ProfileInfo',JSON.stringify(values))
             resetForm();
           } catch (error) {
-            alert("Registration closed");
+            alert("Profile Updation closed");
             console.log(error);
           } finally {
             setSubmitting(false);

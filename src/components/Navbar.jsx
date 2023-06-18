@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import {FaUserCircle} from 'react-icons/fa';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import config from '../config';
 import axios from "axios";
@@ -13,7 +13,7 @@ function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [profile, setProfile] = useState(false);
-
+    let navigate = useNavigate();
     
     useEffect(() => {
         setProfile(true);
@@ -63,6 +63,25 @@ function Navbar() {
         localStorage.removeItem("image_url");
       };
 
+      function handlePostJobButton(){
+        const username = localStorage.getItem("username");
+        if(username==null){
+        alert('Please Login First')
+        }
+        else{
+        navigate('/PostJob');
+        }
+      }
+      function handleProfileButton(){
+        const username = localStorage.getItem("username");
+        if(username==null){
+          alert('Please Login First')
+        }
+        else{
+          navigate('/Profile');
+        }
+      }
+
   return (
     <header className='bg-white'>
         <nav className="container w-full mx-auto px-6 py-3 ">
@@ -97,15 +116,15 @@ function Navbar() {
                 } `}
                 >
                     <div className="flex flex-col md:flex-row items-center">
-                        <Link className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1' to='/PostJob'>
+                        <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1' onClick={handlePostJobButton}>
                             <span className='font-semibold text-xl'>Post Job</span>
-                        </Link>
+                        </button>
                         {/* <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1'>
                             <span className='font-semibold text-xl'>Messages</span>
                         </button> */}
-                        <Link className="mr-2 md:mr-7 md:place-self-center hover:cursor-pointer hover:shadow-md py-1" to="/Profile">
+                        <button className="mr-2 md:mr-7 md:place-self-center hover:cursor-pointer hover:shadow-md py-1" onClick={handleProfileButton}>
                             <FaUserCircle className='w-8 h-8' />
-                        </Link>
+                        </button>
                         <div className="flex items-center py-1 mr-2">
                             <GoogleOAuthProvider clientId={CLIENT_ID}>
                                 <div>

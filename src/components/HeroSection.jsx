@@ -1,8 +1,21 @@
 import React from 'react';
 import Employer_of_choice from '../assets/Employer_of_choice.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+
+  let navigate = useNavigate();
+
+  function handlePostJobButton(){
+    const username = localStorage.getItem("username");
+    if(username==null){
+    alert('Please Login First')
+    }
+    else{
+    navigate('/PostJob');
+    }
+  }
+
   return (
     // <div className='flex flex-col justify-center items-center p-4 w-full h-auto md:h-auto'>
     //     <img src={Employer_of_choice} alt="" style={{objectFit: 'fill'}} />
@@ -33,10 +46,10 @@ const HeroSection = () => {
             </div>
           </div>
       </section>
-      <div className='bg-slate-600 mt-5 p-2 rounded-md hover:drop-shadow-md hover:bg-[#7d87bc]'>
-        <Link to='/PostJob'>
+      <div className='bg-slate-600 mt-5 p-2 mb-4 rounded-md hover:drop-shadow-md hover:bg-[#7d87bc]'>
+        <button onClick={handlePostJobButton}>
             <h1 className='font-bold font-mono text-xl'>Post Job</h1>
-        </Link>
+        </button>
       </div>
     </div>
   )
