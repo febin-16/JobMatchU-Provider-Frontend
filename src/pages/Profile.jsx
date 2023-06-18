@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import Selected_Appl_Info from '../components/Selected_ApplicantsCard'
 import Applicants_Info from '../components/ApplicantsCard'
 import { getJobDetails } from '../api/GetJobDetails'
+import Dashboard from '../components/Dashboard'
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -108,7 +109,7 @@ const Profile = () => {
             }  
             {prof=="Dashboard" && 
                 <div className="w-full p-4">
-                    Dashboard
+                    <Dashboard/>
                 </div>
             }  
             {/* <div className={`${isOpen ? "hidden":"block"} w-full p-4 md:block`} ></div> */}
