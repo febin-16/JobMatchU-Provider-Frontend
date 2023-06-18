@@ -120,8 +120,8 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
             const owner = response.id;
             console.log("profile: ",profil);
             values = {...values, username: username};
-            if(profil == ' '){
-              profileInfo = ' ';
+            if(profil == null){
+              profileInfo = '';
               alert('Please Update Your Profile');
             }
             else{
