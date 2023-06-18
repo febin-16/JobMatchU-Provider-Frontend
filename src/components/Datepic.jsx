@@ -1,17 +1,24 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import DatePicker from'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
-const CustomDatePicker = ({ field, form, ...rest }) => {
+const CustomDatePicker = ({ field, form:{setFieldValue}, ...rest }) => {
   const { name, value } = field;
-  const { setFieldValue } = form;
-
-  const handleChange = (date) => {
-    setFieldValue(name, date);
+ 
+  
+  
+ 
+  
+const handleChange = (date) => {
+   
+      setFieldValue(name, date);
+     
+    
   };
 
   return (
+    <div>
     <DatePicker
       {...rest}
       name={name}
@@ -19,6 +26,9 @@ const CustomDatePicker = ({ field, form, ...rest }) => {
       onChange={handleChange}
       dateFormat="dd/MM/yyyy"
     />
+     <input type="hidden" name={name} value={value} />
+    </div>
+    
   );
 };
 
