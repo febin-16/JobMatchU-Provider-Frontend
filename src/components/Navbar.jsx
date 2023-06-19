@@ -116,6 +116,9 @@ function Navbar() {
                 } `}
                 >
                     <div className="flex flex-col md:flex-row items-center">
+                        <a className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1' href='https://jobmatchu.netlify.app/'>
+                            <span className='font-semibold text-xl'>Job Seeker</span>
+                        </a>
                         <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1' onClick={handlePostJobButton}>
                             <span className='font-semibold text-xl'>Post Job</span>
                         </button>

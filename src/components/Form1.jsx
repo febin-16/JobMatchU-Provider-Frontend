@@ -107,6 +107,19 @@ const validationSchema = Yup.object().shape({
 async function onSubmit(values, {setSubmitting, resetForm}) {
         //console.log(values);
         try {
+          const today = new Date();
+          const startDate = new Date(values.start_date);
+          const endDate = new Date(values.end_date);
+
+          if (startDate < today) {
+            alert("Start date cannot be earlier than today's date");
+            return;
+          }
+
+          if (startDate > endDate) {
+            alert("Start date cannot be later than end date");
+            return;
+          }
           console.log(selectedCategory)
            // console.log(values);
             values = {...values,tags : tags};
@@ -141,7 +154,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
 
   return (
     <div>
-      <div className='h-auto w-full flex flex-col justify-center px-5 md:px-40 py-5'>
+      <div className='h-auto w-full flex flex-col justify-center px-5 md:px-40 py-5 bg-gray-200'>
                 
                 <Formik 
                 initialValues = {initialValues}
@@ -166,7 +179,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                              <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                 <div className='py-3 flex flex-col w-1/2'>
                                   <label htmlFor="jobtype" className='py-1'>Job Type</label>
-                                    <Field as="select" name="jobtype" className="w-4/5">
+                                    <Field as="select" name="jobtype" className="w-4/5 outline outline-gray-300 rounded-sm px-2  focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500">
                                       <option value="">Select an option</option>
                                       {jobtypeoptions.map((option) => (
                                         <option key={option.value} value={option.value}>
@@ -178,7 +191,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                  </div>
                                 <div className='py-3 flex flex-col w-1/2'>
                                 <label htmlFor="locationtype" className='py-1'>Location type</label>
-                                    <Field as="select" name="locationtype" className="w-full">
+                                    <Field as="select" name="locationtype" className="w-full outline outline-gray-300 rounded-sm px-2  focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500">
                                       <option value="">Select an option</option>
                                       {locntypeoptions.map((option) => (
                                         <option key={option.value} value={option.value}>
@@ -193,7 +206,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                  <div  className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                  <div className='py-3 flex flex-col w-1/2'>
                                    <label htmlFor="category" className='py-1'>Category</label>
-                                     <Field  as="select" name="category" className="w-4/5" onChange={e => {
+                                     <Field  as="select" name="category" className="w-4/5 outline outline-gray-300 rounded-sm px-2  focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500" onChange={e => {
                                        const id = categoryDetails.filter((item)=>item.name==e.target.value)
                                        setSelectedCategory(id);
                                       setFieldValue('category',e.target.value);
@@ -230,17 +243,17 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
             
                              
                             </div>
-                            <div className='h-auto w-full flex flex-row justify-between item-stretch md:flex-row py-3'>
-                              <div className="w-1/2 flex flex-col ">
-                              <label className='text-lg font-serif  text-gray-700'>Start date</label>
-                              <Field component={CustomDatePicker} name="start_date" className="w-4/5 "/>
+                            <div className='h-auto w-full flex flex-row  py-3'>
+                              <div className="w-1/2 flex flex-col">
+                              <label className='w-full text-lg font-serif  text-gray-700'>Start date</label>
+                              <Field component={CustomDatePicker} name="start_date" className=" outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="start_date"  style={{ color: 'red' }}  component="div" />
                                 
                               </div>
                             
-                              <div className="w-1/2 flex flex-col">
+                              <div className=" w-1/2 flex flex-col">
                                 <label className='text-lg font-serif  text-gray-700'>End date</label>
-                                <Field component={CustomDatePicker} name="end_date" className="w-full"/>
+                                <Field component={CustomDatePicker} name="end_date" className="w-full outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="end_date"  style={{ color: 'red' }}  component="div" />
                               </div>
                             
@@ -313,3 +326,17 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
 }
 
 export default Form1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
