@@ -65,15 +65,27 @@ function Navbar() {
 
       function handlePostJobButton(){
         const username = localStorage.getItem("username");
+        let profileInfo;
+            let profil = localStorage.getItem("ProfileInfo");
         if(username==null){
-        alert('Please Login First')
+          alert('Please Login First')
         }
         else{
-        navigate('/PostJob');
+          if(profil == null){
+            profileInfo = '';
+            alert('Please Update Your Profile');
+            navigate('/Profile');
+          }
+          else{
+            profileInfo = JSON.parse(profil);
+            navigate('/PostJob');
+          }
+          
         }
       }
       function handleProfileButton(){
         const username = localStorage.getItem("username");
+        
         if(username==null){
           alert('Please Login First')
         }
