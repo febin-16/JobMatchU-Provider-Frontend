@@ -115,9 +115,9 @@ const Profile = () => {
             {/* <div className={`${isOpen ? "hidden":"block"} w-full p-4 md:block`} ></div> */}
              {prof=="Jobs" && 
                 <div className={`${isOpen ? "hidden":"block"} w-full p-4 md:block`} >
-                  <div className='h-[50px] w-full flex justify-center bg-gray-300 rounded-md items-center'>
-                      <h1 className='text-2xl font-sans font-bold text-gray-500'>My Jobs</h1>
-                  </div>
+                  <div className='h-[50px] w-full flex justify-center bg-gray-800 rounded-md items-center'>
+                    <h1 className='text-2xl font-sans font-bold text-gray-100'>My Jobs</h1>
+                </div>
                   {jobs&&jobs.map((job)=>{
                     return(
                       <JobCard  details={job} key={job.id}/>
