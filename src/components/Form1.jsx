@@ -154,7 +154,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
 
   return (
     <div>
-      <div className='h-auto w-full flex flex-col justify-center px-5 md:px-40 py-5 bg-[#F9F5EB]'>
+      <div className='h-auto w-full flex flex-col justify-center px-5 md:px-40 py-5 bg-gray-200'>
                 
                 <Formik 
                 initialValues = {initialValues}
@@ -243,17 +243,17 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
             
                              
                             </div>
-                            <div className='h-auto w-full flex flex-row justify-between  md:flex-row py-3'>
+                            <div className='h-auto w-full flex flex-row  py-3'>
                               <div className="w-1/2 flex flex-col">
-                              <label className='text-lg font-serif  text-gray-700 w-full'>Start date</label>
-                              <Field component={CustomDatePicker} name="start_date" className="outline outline-gray-300 rounded-sm px-2 s w-full focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500"/>
+                              <label className='w-full text-lg font-serif  text-gray-700'>Start date</label>
+                              <Field component={CustomDatePicker} name="start_date" className=" outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="start_date"  style={{ color: 'red' }}  component="div" />
                                 
                               </div>
                             
                               <div className=" w-1/2 flex flex-col">
-                                <label className='text-lg font-serif  text-gray-700 w-full'>End date</label>
-                                <Field component={CustomDatePicker} name="end_date" className="outline outline-gray-300 rounded-sm px-2 s w-full focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500"/>
+                                <label className='text-lg font-serif  text-gray-700'>End date</label>
+                                <Field component={CustomDatePicker} name="end_date" className="w-full outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="end_date"  style={{ color: 'red' }}  component="div" />
                               </div>
                             

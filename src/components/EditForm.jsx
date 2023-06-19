@@ -114,6 +114,19 @@ const validationSchema = Yup.object().shape({
 
 async function onSubmit(values, {setSubmitting, resetForm}) {
         try {
+          const today = new Date();
+          const startDate = new Date(values.start_date);
+          const endDate = new Date(values.end_date);
+
+          if (startDate < today) {
+            alert("Start date cannot be earlier than today's date");
+            return;
+          }
+
+          if (startDate > endDate) {
+            alert("Start date cannot be later than end date");
+            return;
+          }
           console.log("sel cat: ",selectedCategory);
           if(selectedCategory==''){
             values = {...values, subcategory: category[0].id}
