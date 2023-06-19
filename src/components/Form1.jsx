@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import CustomDatePicker from './Datepic';
-import {AiOutlinePlusCircle} from "react-icons/ai";
+import {BsFillPlusCircleFill} from "react-icons/bs";
 import { getProviderId } from '../api/GetProviderId';
 import { JobPostUpdate } from '../api/JobPostUpdate';
 import { getCategoryDetails } from '../api/GetCategoryDetails';
@@ -148,7 +148,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
 
   return (
     <div>
-      <div className='h-auto w-full flex flex-col justify-center px-5 md:px-40 py-5 bg-gray-200'>
+      <div className='h-auto w-full flex flex-col justify-center px-5 md:px-40 py-5 bg-gray-900'>
                 
                 <Formik 
                 initialValues = {initialValues}
@@ -159,11 +159,11 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                        <div className='w-7/8'>
                       <Form>
 
-                            <h1 className='text-2xl font-serif font-bold text-gray-1000 pt-4 pb-2'>Basic Details</h1>
+                            <h1 className='text-2xl font-serif font-bold text-gray-100 pt-4 pb-2'>Basic Details</h1>
                            
                             <div className='h-auto w-full flex flex-col justify-between md:flex-row py-3'>
                                 <div className='w-full items-start  '>
-                                    <label className='text-lg font-serif  text-gray-700 mb-5'>Job Title</label>
+                                    <label className='text-lg font-serif  text-gray-100 mb-5'>Job Title</label>
                                     
                                         <Field type="text" name="title" className='outline outline-gray-300 rounded-sm px-2 s w-full focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
                                         </Field>
@@ -172,7 +172,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                             </div>
                              <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                 <div className='py-3 flex flex-col w-1/2'>
-                                  <label htmlFor="jobtype" className='py-1'>Job Type</label>
+                                  <label htmlFor="jobtype" className='py-1 text-gray-100'>Job Type</label>
                                     <Field as="select" name="jobtype" className="w-4/5 outline outline-gray-300 rounded-sm px-2  focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500">
                                       <option value="">Select an option</option>
                                       {jobtypeoptions.map((option) => (
@@ -184,7 +184,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                                     <ErrorMessage name="jobtype" style={{ color: 'red' }} component="div" />
                                  </div>
                                 <div className='py-3 flex flex-col w-1/2'>
-                                <label htmlFor="locationtype" className='py-1'>Location type</label>
+                                <label htmlFor="locationtype" className='py-1 text-gray-100'>Location type</label>
                                     <Field as="select" name="locationtype" className="w-full outline outline-gray-300 rounded-sm px-2  focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500">
                                       <option value="">Select an option</option>
                                       {locntypeoptions.map((option) => (
@@ -199,7 +199,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                              {categoryDetails && 
                                  <div  className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                  <div className='py-3 flex flex-col w-1/2'>
-                                   <label htmlFor="category" className='py-1'>Category</label>
+                                   <label htmlFor="category" className='py-1 text-gray-100'>Category</label>
                                      <Field  as="select" name="category" className="w-4/5 outline outline-gray-300 rounded-sm px-2  focus:outline-form-border  placeholder-gray-300 focus:ring-1 focus:ring-cyan-500" onChange={e => {
                                        const id = categoryDetails.filter((item)=>item.name==e.target.value)
                                        setSelectedCategory(id);
@@ -222,13 +222,13 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                            
                             <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                                 <div className='w-1/2 flex flex-col'>
-                                    <label className='text-lg font-serif  text-gray-700 w-full'>Hours per week</label>
+                                    <label className='text-lg font-serif  text-gray-100 w-full'>Hours per week</label>
                                     <Field type="text" name="hrs" className='outline outline-gray-300 rounded-sm py-1 px-2 w-4/5 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
                                     </Field>
                                     <ErrorMessage style={{ color: 'red' }} name="hrs" component="div" />
                                 </div>
                                 <div className='w-1/2  flex flex-col'>
-                                    <label className='text-lg font-serif  text-gray-700 w-full'>Location</label>
+                                    <label className='text-lg font-serif  text-gray-100 w-full'>Location</label>
                                     <Field type="text" name="location" className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
                                     </Field>
                                     <ErrorMessage style={{ color: 'red' }} name="location" component="div" />
@@ -239,14 +239,14 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                             </div>
                             <div className='h-auto w-full flex flex-row  py-3'>
                               <div className="w-1/2 flex flex-col">
-                              <label className='w-full text-lg font-serif  text-gray-700'>Start date</label>
+                              <label className='w-full text-lg font-serif  text-gray-100'>Start date</label>
                               <Field component={CustomDatePicker} name="start_date" className="w-4/5 outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="start_date"  style={{ color: 'red' }}  component="div" />
                                 
                               </div>
                             
                               <div className=" w-1/2 flex flex-col">
-                                <label className='text-lg font-serif  text-gray-700'>End date</label>
+                                <label className='text-lg font-serif  text-gray-100'>End date</label>
                                 <Field component={CustomDatePicker} name="end_date" className="w-full outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="end_date"  style={{ color: 'red' }}  component="div" />
                               </div>
@@ -254,7 +254,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                             </div>
                             <div className='h-auto w-full flex flex-col justify-between md:flex-row py-3'>
                                 <div className='w-full md:w-full items-start'>
-                                  <label className='text-lg font-serif  text-gray-700'>How many people needed </label>
+                                  <label className='text-lg font-serif  text-gray-100'>How many people needed </label>
                                 </div>
                                 <div className='md:w-full w-full items-start '>
                                     <Field type="text" name="count" className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
@@ -264,7 +264,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                             </div>
                             <div className='h-auto w-full flex flex-row justify-between md:flex-row py-3'>
                              
-                                    <label className='text-lg font-serif  text-gray-700 w-2/5'>Pay Rate</label>
+                                    <label className='text-lg font-serif  text-gray-100 w-2/5'>Pay Rate</label>
                                 
                                     <Field type="text" name="stripend" className=' w-1/2 outline outline-gray-300 rounded-sm py-1 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
                                     </Field>
@@ -273,12 +273,12 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                               
                             </div>
                             <div className='w-full flex flex-col md:flex-row py-3 md:items-center'>
-                                    <label className='text-lg font-serif  text-gray-700 pr-4 '>Tags</label>
+                                    <label className='text-lg font-serif  text-gray-100 pr-4 '>Tags</label>
                                     <div className='flex flex-row w-full'>
                                         <Field type="text" name="tag" value={input} onChange={handleTagChange} className='outline outline-gray-300 rounded-sm py-1 px-2 w-full md:w-3/4 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
                                         </Field>
                                         <span className='p-2 place-self-center' onClick={handleTagSubmit}>
-                                            <AiOutlinePlusCircle className='place-self-center w-[30px] h-[30px]'/>
+                                            <BsFillPlusCircleFill className='bg-white rounded-full place-self-center w-[30px] h-[30px] '/>
                                         </span>
                                     </div>
                                     
@@ -292,7 +292,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                             </div>
                              <div className='h-auto w-full flex flex-col justify-between md:flex-col py-3'>
                                 <div className='w-full  md:3/5 items-start '>
-                                  <label className='text-lg font-serif  text-gray-700'>Job Description</label>
+                                  <label className='text-lg font-serif  text-gray-100'>Job Description</label>
                                 </div>
                                 <div className='w-full md:3/5  items-start  '>
                                     <Field type="text" name="description" className='outline outline-gray-300 rounded-sm py-1 px-2 w-full h-20 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500'>
@@ -306,7 +306,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                     <button 
                         type="submit" 
                        disabled={isSubmitting}
-                        className='float-right bg-gray-900 rounded-full px-6 py-2 text-sm font-semibold text-slate-200 text-xl hover:bg-slate-600'>
+                        className='float-right bg-gray-600 rounded-full px-6 py-2 text-sm font-semibold text-slate-200 text-xl hover:bg-slate-500'>
                         continue
                     </button>
                       </div>

@@ -21,41 +21,41 @@ function Dashboard() {
   return (
     <div className='h-auto w-full flex flex-col'>
         {details && <div>
-                <div className='h-[50px] w-full flex justify-center bg-gray-300 rounded-md items-center'>
-                    <h1 className='text-2xl font-sans font-bold text-gray-500'>Dashboard</h1>
+                <div className='h-[50px] w-full flex justify-center bg-gray-900 rounded-md items-center'>
+                    <h1 className='text-2xl font-sans font-bold text-gray-100'>Dashboard</h1>
                 </div>
             <div className='h-auto w-full flex flex-col justify-center min-px-5 md:px-40 py-5'>
                 
                 
 
-                            <h1 className='text-2xl font-serif font-bold text-gray-500 pl-4 pt-4 pb-2'>Dashboard Details</h1>
+                            <h1 className='text-2xl font-serif font-bold text-gray-100 pl-4 pt-4 pb-2'>Dashboard Details</h1>
                             <div className='h-auto w-full flex flex-col justify-between md:flex-row md:px-10 px-4 py-3'>
-                                <div  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500' placeholder="Company Name">
+                                <div  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border text-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Name">
                                     <h1>{details.name}</h1>
                                 </div>
                             </div>
                             <div className='h-auto w-full flex flex-col justify-between md:flex-row md:px-10 px-4'>
                                 <div className='md:w-2/5 items-start py-3'>
-                                    <div  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500' placeholder="Company Phone Number">
+                                    <div  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border text-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Phone Number">
                                         <h1>{details.phone_number}</h1>
                                     </div>
                                     
                                 </div>
                                 <div className='md:w-2/5 items-start py-3 '>
-                                    <div type="text"  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500' placeholder="Company Email Id">
+                                    <div type="text"  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border text-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Email Id">
                                         <h1>{localStorage.getItem("email")}</h1>
                                     </div>
                                 </div>
                             </div>
                         
                             <div className='h-auto w-full flex flex-col justify-between md:flex-row md:px-10 px-4 py-3'>
-                                <div className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500' placeholder="Company Address">
+                                <div className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border text-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Address">
                                        <h1>{details.address}</h1> 
                                 </div>
                             </div>
 
                             <div className='h-auto md:h-[150px] w-full flex flex-col justify-between md:flex-row md:px-10 px-4 py-3'>
-                                <div  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500' placeholder="About your company">
+                                <div  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border text-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="About your company">
                                         <h1>{details.description}</h1>
                                 </div>
                             </div>
