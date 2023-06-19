@@ -95,14 +95,14 @@ function Navbar() {
       }
 
   return (
-    <header className='bg-white'>
+    <header className='bg-gradient-to-r from-slate-800 to-slate-950'>
         <nav className="container w-full mx-auto px-6 py-3 ">
             <div className='flex flex-col md:flex-row md:justify-between md:items-center '>
                 <div className="flex justify-between items-center">
                     <div className='flex items-center'>
                         <img src='../src/assets/logo png.png' className='w-[30px] h-[30px] place-self-center mx-2 ' />
                         <Link
-                            className="text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700"
+                            className="text-gray-100 text-xl font-bold md:text-2xl hover:text-gray-200"
                             to="/"
                         >
                             JobMatchU
@@ -112,7 +112,7 @@ function Navbar() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             type="button"
-                            className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
+                            className="text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200"
                             aria-label="toggle menu"
                         >
                             <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
@@ -130,16 +130,16 @@ function Navbar() {
                 >
                     <div className="flex flex-col md:flex-row items-center">
                         <a className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1' href='https://jobmatchu.netlify.app/'>
-                            <span className='font-semibold text-xl'>Job Seeker</span>
+                            <span className='font-semibold text-xl text-gray-100'>Job Seeker</span>
                         </a>
-                        <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1' onClick={handlePostJobButton}>
-                            <span className='font-semibold text-xl'>Post Job</span>
+                        <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1 text-gray-100' onClick={handlePostJobButton}>
+                            <span className='font-semibold text-xl text-gray-100'>Post Job</span>
                         </button>
                         {/* <button className='mr-2 md:mr-7 hover:cursor-pointer hover:shadow-md py-1'>
                             <span className='font-semibold text-xl'>Messages</span>
                         </button> */}
-                        <button className="mr-2 md:mr-7 md:place-self-center hover:cursor-pointer hover:shadow-md py-1" onClick={handleProfileButton}>
-                            <FaUserCircle className='w-8 h-8' />
+                        <button className="mr-2 md:mr-7 md:place-self-center hover:cursor-pointer hover:shadow-md py-1 " onClick={handleProfileButton}>
+                            <p className='font-semibold text-xl text-gray-100'>Profile</p>
                         </button>
                         <div className="flex items-center py-1 mr-2">
                             <GoogleOAuthProvider clientId={CLIENT_ID}>
