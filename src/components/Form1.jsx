@@ -131,18 +131,12 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
             let profil = localStorage.getItem("ProfileInfo");
           //  console.log("own id: ",response.id);
             const owner = response.id;
-            console.log("profile: ",profil);
+            // console.log("profile: ",profil);
             values = {...values, username: username};
-            if(profil == null){
-              profileInfo = '';
-              alert('Please Update Your Profile');
-            }
-            else{
-              profileInfo = JSON.parse(profil);
+              // profileInfo = JSON.parse(profil);
               delete values.category
               await JobPostUpdate(values);
               resetForm();
-            }
           } catch (error) {
             alert("Job Posting Failed");
             console.log(error);
@@ -246,7 +240,7 @@ async function onSubmit(values, {setSubmitting, resetForm}) {
                             <div className='h-auto w-full flex flex-row  py-3'>
                               <div className="w-1/2 flex flex-col">
                               <label className='w-full text-lg font-serif  text-gray-700'>Start date</label>
-                              <Field component={CustomDatePicker} name="start_date" className=" outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
+                              <Field component={CustomDatePicker} name="start_date" className="w-4/5 outline outline-gray-300 rounded-sm py-1 px-2 focus:outline-form-border placeholder-gray-300 focus:ring-1 focus:ring-cyan-500 "/>
                                <ErrorMessage name="start_date"  style={{ color: 'red' }}  component="div" />
                                 
                               </div>
