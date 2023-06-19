@@ -9,7 +9,7 @@ const HeroSection = () => {
   function handlePostJobButton(){
     const username = localStorage.getItem("username");
     let profileInfo;
-        let profil = localStorage.getItem("ProfileInfo");
+    let profil = localStorage.getItem("ProfileInfo");
     if(username==null){
       alert('Please Login First')
     }
