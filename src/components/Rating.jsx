@@ -35,7 +35,7 @@ const Rating = ({details}) => {
 
   return (
     <div>
-        <h2 className='text-2xl font-semibold text-gray-800 pt-1'>Rating: {stars} star</h2>
+        <h2 className='text-2xl font-semibold text-gray-100 pt-1'>Rating: {stars} star</h2>
         <div>
             {[1, 2, 3, 4, 5].map((number) => (
             <span
@@ -54,8 +54,8 @@ const Rating = ({details}) => {
         </div>
         <form onSubmit={handleFeedbackSubmit} className='flex flex-row justify-start'> 
             <textarea value={feedback} onChange={handleFeedbackChange} placeholder='Feedback' rows={4} className=' bg-gray-200 my-2 py-2 px-4 border solid border-gray-400 w-full md:w-4/5 rounded-md'/>
-            <div className='place-self-end p-1 bg-blue-500 mx-2 rounded-full hover:bg-blue-400 hover:text-gray-600 mb-2'>
-                <button type='submit' className='text-md font-semibold px-4 py-1' onClick={handleSubmit}>Submit</button>
+            <div className='place-self-end p-1 bg-gray-900 mx-2 rounded-full hover:bg-gray-500  mb-2'>
+                <button type='submit' className='text-md font-semibold px-4 py-1 text-gray-100' onClick={handleSubmit}>Submit</button>
             </div>
         </form>
     </div>

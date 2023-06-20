@@ -20,15 +20,15 @@ function JobCard({details}){
 
   return (
     <div className='w-full h-auto pb-2 flex flex-row justify-center p-3 md:px-40'>	
-		<div className="flex flex-col justify-between w-full min-h-[250px] h-auto  border border-solid rounded-xl p-4 bg-gray-200 hover:shadow-md drop-shadow-md hover:shadow-gray-400">
+		<div className="flex flex-col justify-between w-full min-h-[250px] h-auto  border border-solid rounded-xl p-4 bg-gray-700 hover:shadow-md drop-shadow-md hover:shadow-gray-400">
             <div className=''>
                 <div className="flex justify-between items-center py-3 ">
-                    <h2 className="text-2xl font-bold text-gray-900 mr-4">{details.title}</h2>
+                    <h2 className="text-2xl font-bold text-gray-100 mr-4">{details.title}</h2>
                 </div>
                 <div className=''>
-                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.locationtype}</h3>
-                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.location}</h3>
-                    <h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.stripend}</h3>    
+                    <h3 className="flex flex-wrap text-xl font-large text-gray-100 pt-1">{details.locationtype}</h3>
+                    <h3 className="flex flex-wrap text-xl font-large text-gray-100 pt-1">{details.location}</h3>
+                    <h3 className="flex flex-wrap text-xl font-large text-gray-100 pt-1">{details.stripend}</h3>    
                 </div>
                 <div className='flex flex-row flex-wrap space-x-2 pt-2'>
                     {details.tags.map((i,index) => {

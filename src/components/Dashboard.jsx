@@ -21,14 +21,14 @@ function Dashboard() {
   return (
     <div className='h-auto w-full flex flex-col'>
         {details && <div>
-                <div className='h-[50px] w-full flex justify-center bg-gray-900 rounded-md items-center'>
-                    <h1 className='text-2xl font-sans font-bold text-gray-100'>Dashboard</h1>
-                </div>
+            <div className='h-[50px] w-full flex justify-center bg-gray-800 rounded-md items-center'>
+                <h1 className='text-2xl font-sans font-bold text-gray-100'>Dashboard</h1>
+            </div>
             <div className='h-auto w-full flex flex-col justify-center min-px-5 md:px-40 py-5'>
                 
                 
 
-                            <h1 className='text-2xl font-serif font-bold text-gray-100 pl-4 pt-4 pb-2'>Dashboard Details</h1>
+                            
                             <div className='h-auto w-full flex flex-col justify-between md:flex-row md:px-10 px-4 py-3'>
                                 <div  className='outline outline-gray-300 rounded-sm py-1 px-2 w-full focus:outline-form-border text-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Name">
                                     <h1>{details.name}</h1>

@@ -82,15 +82,15 @@ function ApplicantsCard({details}){
 	return (
 		<div>
 			<div className='w-full h-auto pb-2 flex flex-row justify-center p-3 md:px-40'>	
-				<div className="flex justify-between w-full min-h-[250px] h-auto md:h-[250px] border border-solid rounded-xl p-4 bg-gray-200 hover:shadow-md drop-shadow-md hover:shadow-gray-400">
+				<div className="flex justify-between w-full min-h-[250px] h-auto md:h-[250px] border border-solid rounded-xl p-4 bg-gray-700 hover:shadow-md drop-shadow-md hover:shadow-gray-400">
 					<div className=''>
 						<div className="flex justify-between items-center py-3 ">
-							<h2 className="text-2xl font-bold text-gray-900 mr-4">{details.applicant.first_name} {details.applicant.last_name}</h2>
+							<h2 className="text-2xl font-bold text-gray-100 mr-4">{details.applicant.first_name} {details.applicant.last_name}</h2>
 						</div>
 						<div className=''>
-							<h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.applicant.student.email}</h3>
-							<h3 className="flex flex-wrap text-xl font-large text-gray-900 pt-1">{details.applicant.phone_number}</h3>
-							<h3 className="text-xl font-large text-gray-900 pb-1">Skills: {details.applicant.skills}</h3>
+							<h3 className="flex flex-wrap text-xl font-large text-gray-100 pt-1">{details.applicant.student.email}</h3>
+							<h3 className="flex flex-wrap text-xl font-large text-gray-100 pt-1">{details.applicant.phone_number}</h3>
+							<h3 className="text-xl font-large text-gray-100 pb-1">Skills: {details.applicant.skills}</h3>
 							
 							
 						</div>
@@ -110,47 +110,47 @@ function ApplicantsCard({details}){
 			{showModal && ( 
 			<div>
 				<div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-					<div className="relative  w-full md:w-3/4 md:h-3/4 my-6 mx-auto max-w-5xl bg-gray-300 rounded-xl shadow-xl overflow-y-scroll scroll-hidden">
+					<div className="relative  w-full md:w-3/4 md:h-3/4 my-6 mx-auto max-w-5xl bg-gray-500 rounded-xl shadow-xl overflow-y-scroll scroll-hidden">
 						<div className="border-0 relative flex flex-col w-full outline-none focus:outline-none">
 							<div className="relative  pl-4 py-4 md:p-6 flex-auto md:ml-8">
 								<div className='flex flex-col border-b solid border-gray-400 pb-2'>
-									<h1 className='text-2xl font-semibold text-gray-950 py-1'>Basic Details</h1>
+									<h1 className='text-2xl font-semibold text-gray-100 py-1'>Basic Details</h1>
 
 								</div>
 								<div className='flex flex-col pl-6'>
-									<h1 className='text-xl text-gray-800 py-1 pt-2'>{details.first_name} {details.last_name}</h1>
-									<h1 className='text-xl text-gray-800 py-1'>{details.applicant.phone_number}</h1>
-									<h1 className='text-xl text-gray-800 py-1'>{details.applicant.student.email}</h1>
-									<h1 className='text-xl text-gray-800 py-1'>{details.applicant.first_name} {details.applicant.last_name}, {details.applicant.city}, {details.applicant.district} district, {details.applicant.state}</h1>
-									<h1 className='text-xl text-gray-800 py-1'>{details.applicant.pincode}</h1>
+									<h1 className='text-xl text-gray-100 py-1 pt-2'>{details.first_name} {details.last_name}</h1>
+									<h1 className='text-xl text-gray-100 py-1'>{details.applicant.phone_number}</h1>
+									<h1 className='text-xl text-gray-100 py-1'>{details.applicant.student.email}</h1>
+									<h1 className='text-xl text-gray-100 py-1'>{details.applicant.first_name} {details.applicant.last_name}, {details.applicant.city}, {details.applicant.district} district, {details.applicant.state}</h1>
+									<h1 className='text-xl text-gray-100 py-1'>{details.applicant.pincode}</h1>
 								</div>
 								<div className='flex flex-col border-b solid border-gray-400 pb-2'>
-									<h1 className='text-2xl font-semibold text-gray-800 py-1'>Academic Details</h1>
+									<h1 className='text-2xl font-semibold text-gray-100 py-1'>Academic Details</h1>
 
 								</div>
 								<div className='flex flex-col pl-6'>
-									<h1 className='text-xl text-gray-800 py-1 pt-2'>{details.applicant.level_of_edu}</h1>
-									<h1 className='text-xl text-gray-800 py-1'>{details.applicant.field_of_study}</h1>
-									<h1 className='text-xl text-gray-800 py-1'>{details.applicant.skills}</h1>
+									<h1 className='text-xl text-gray-100 py-1 pt-2'>{details.applicant.level_of_edu}</h1>
+									<h1 className='text-xl text-gray-100 py-1'>{details.applicant.field_of_study}</h1>
+									<h1 className='text-xl text-gray-100 py-1'>{details.applicant.skills}</h1>
 								
 								</div>
 								<div className='flex flex-col border-b solid border-gray-400 pb-2'>
-									<h1 className='text-2xl font-semibold text-gray-800 py-1'>Work Experience Details</h1>
+									<h1 className='text-2xl font-semibold text-gray-100 py-1'>Work Experience Details</h1>
 
 								</div>
 								<div className='flex flex-col pl-6'>
-									<h1 className='text-xl text-gray-800 py-1 pt-2'>{details.applicant.job_title}</h1>
-									<h1 className='text-xl text-gray-800 py-1 pb-6'>{details.applicant.job_description}</h1>								
+									<h1 className='text-xl text-gray-100 py-1 pt-2'>{details.applicant.job_title}</h1>
+									<h1 className='text-xl text-gray-100 py-1 pb-6'>{details.applicant.job_description}</h1>								
 								</div>
 								<div className='flex flex-col border-b solid border-gray-400 pb-2'>
-									<h1 className='text-2xl font-semibold text-gray-800 py-1'>Reviews and Ratings Of Previous Jobs</h1>
+									<h1 className='text-2xl font-semibold text-gray-100 py-1'>Reviews and Ratings Of Previous Jobs</h1>
 								</div>
 								<div className='flex flex-col pl-6'>
 									{ratings.map((i,index) => {
 										return(
 											<>
 												<div>
-													<h1 className='text-2xl font-bold text-gray-800 pt-4' key={index}>{i.job.title}</h1>
+													<h1 className='text-2xl font-bold text-gray-100 pt-4' key={index}>{i.job.title}</h1>
 													<div className='pl-10'>
 														{[1,2,3,4,5].map((number) => (
 														<span
@@ -165,7 +165,7 @@ function ApplicantsCard({details}){
 															&#9733;
 														</span>
 														))}
-														<h1 className='text-xl text-gray-800 pb-3' key={index}>{i.comment}</h1>
+														<h1 className='text-xl text-gray-100 pb-3' key={index}>{i.comment}</h1>
 													</div>
 													
 												</div>

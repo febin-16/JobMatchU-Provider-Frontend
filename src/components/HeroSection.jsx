@@ -9,7 +9,7 @@ const HeroSection = () => {
   function handlePostJobButton(){
     const username = localStorage.getItem("username");
     let profileInfo;
-        let profil = localStorage.getItem("ProfileInfo");
+    let profil = localStorage.getItem("ProfileInfo");
     if(username==null){
       alert('Please Login First')
     }
@@ -39,7 +39,7 @@ const HeroSection = () => {
     //         </button>
     //     </div>  
     // </div>
-    <div className="w-full h-auto bg-gray-50 flex flex-col items-center">
+    <div className="w-full h-auto bg-gray-950 flex flex-col items-center">
       <section className="p-10  bg-cover bg-center py-32 w-full bg-opacity-32" style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${'https://source.unsplash.com/random'})`,
         backgroundSize: "cover",
@@ -57,9 +57,9 @@ const HeroSection = () => {
             </div>
           </div>
       </section>
-      <div className='bg-slate-600 mt-5 p-2 mb-4 rounded-md hover:drop-shadow-md hover:bg-[#7d87bc]'>
+      <div className='bg-gradient-to-r from-slate-700 to-slate-800 mt-5 p-2 mb-4 rounded-md hover:drop-shadow-md hover:bg-[#7d87bc]'>
         <button onClick={handlePostJobButton}>
-            <h1 className='font-bold font-mono text-xl'>Post Job</h1>
+            <h1 className='font-bold font-mono text-gray-200 text-xl'>Post Job</h1>
         </button>
       </div>
     </div>
