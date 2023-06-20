@@ -52,7 +52,7 @@ const HeroSection = () => {
                 <p className='text-lg mb-12 font-mono'>“Empower your local community by providing <br /> part-time job opportunities for students <br /> and help them gain valuable work experience”.</p>
             </div>
             <div className="w-1/2 pl-16">
-              <img src="https://source.unsplash.com/random?ux" className="hidden md:block h-64 w-full object-cover rounded-xl" alt="Layout Image"/>
+              <img src="/home pic.jpeg" className="hidden md:block h-64 w-full object-cover rounded-xl" alt="Layout Image"/>
           </div>
             </div>
           </div>
