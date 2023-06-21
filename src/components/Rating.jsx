@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import {RatingUpdate} from '../api/RatingUpdate';
 
 const Rating = ({details}) => {
+
+  // console.log("Got: ",details);
+
   const [stars, setStars] = useState(0);
   const [feedback, setFeedback] = useState('');
 
@@ -11,7 +14,7 @@ const Rating = ({details}) => {
 
   function handleFeedbackSubmit(event){
 		event.preventDefault();
-		console.log(feedback);
+		// console.log(feedback);
   }
 
   function handleFeedbackChange(event){
@@ -19,18 +22,32 @@ const Rating = ({details}) => {
   }
 
   async function handleSubmit(){
-	try{
-		const data = {
-			job : details.job.id,
-			student : details.student.id,
-			rating : stars,
-			comment : feedback
-		}
-		console.log("sending data: ",data);
-		await RatingUpdate(data);
-	}catch(error){
-		console.log(error);
-	}
+	  try{
+      const today = new Date();
+      const end_date = new Date(details.job.end_date);
+
+      if(end_date > today){
+        alert('Rating only possible after completion of work');
+        return
+      }
+      else{
+        if(stars == 0){
+          alert('Rating Cannot be 0');
+          return;
+        }
+        const data = {
+          job : details.job.id,
+          student : details.student.id,
+          rating : stars,
+          comment : feedback
+        }
+        // console.log("sending data: ",data);
+        await RatingUpdate(data);
+      }
+      
+    }catch(error){
+      console.log(error);
+    }
   }
 
   return (
