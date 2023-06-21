@@ -21,7 +21,7 @@ function Profile_Info(){
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Company_name is required"),
-        phone_number: Yup.string().required("Company contact number is required"),
+        phone_number: Yup.string().required("Company contact number is required").length(10),
         address: Yup.string().required("Company address is required"),
         description : Yup.string()
 
@@ -63,13 +63,13 @@ function Profile_Info(){
                                 <Field type="text" name="name" className='text-gray-100 outline bg-gray-900 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Name">
                                         
                                 </Field>
-                                <ErrorMessage style={{ color: 'red' }} name="company_name" component="div" />
+                                <ErrorMessage style={{ color: 'red' }} name="name" component="div" />
                             </div>
                             <div className='h-auto w-full flex flex-col justify-between md:flex-row md:px-10 px-4'>
-                                    <Field type="text" name="phone_number" className='text-gray-100  outline bg-gray-900 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Phone Number">
+                                    <Field type="text" name="phone_number"  className='text-gray-100  outline bg-gray-900 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Phone Number">
                                         
                                     </Field>
-                                    <ErrorMessage style={{ color: 'red' }} name="c_phone" component="div" />
+                                    <ErrorMessage style={{ color: 'red' }} name="phone_number" component="div" />
                                 
                                 
                             </div>
@@ -78,21 +78,21 @@ function Profile_Info(){
                                 <Field type="text" name="address" className='text-gray-100  outline bg-gray-900 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="Company Address">
                                         
                                 </Field>
-                                <ErrorMessage style={{ color: 'red' }} name="c_address" component="div" />
+                                <ErrorMessage style={{ color: 'red' }} name="address" component="div" />
                             </div>
 
                             <div className='h-auto md:h-[150px] w-full flex flex-col justify-between md:flex-row md:px-10 px-4 py-3'>
                                 <Field type="text" name="description" className='text-gray-100  outline bg-gray-900 rounded-sm py-1 px-2 w-full focus:outline-form-border placeholder-gray-100 focus:ring-1 focus:ring-cyan-500' placeholder="About your company">
                                         
                                 </Field>
-                                <ErrorMessage style={{ color: 'red' }} name="c_desc" component="div" />
+                                <ErrorMessage style={{ color: 'red' }} name="description" component="div" />
                             </div>
 
                             <div className='px-4 md:px-10 py-3'>
                                 <button 
                                     type="submit" 
                                     disabled={isSubmitting}
-                                    className='bg-gray-600 rounded-full px-6 py-2 text-sm font-semibold text-slate-200 text-xl hover:bg-slate-700'>
+                                    className='bg-gray-700 rounded-full px-6 py-2 text-sm font-semibold text-slate-200 text-xl hover:bg-slate-600'>
                                 Save
                                 </button>
                             </div>
