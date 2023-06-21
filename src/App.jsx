@@ -9,11 +9,22 @@ import PostJob from './pages/PostJob'
 import JobDetails from './pages/JobDetails';
 import AboutUs from "./pages/AboutUs";
 import MeetTheTeam from "./pages/MeetTheTeam";
+import SplashScreen from './components/SplashScreen';
+import { useState } from 'react';
 
 function App() {
+
+  const [showContent, setShowContent] = useState(false);
+  
+  const handleAnimationComplete = () => {
+    setShowContent(true);
+  };
+
   return(
     <div>  
-      <BrowserRouter>
+      {!showContent ?
+        <SplashScreen onAnimationComplete={handleAnimationComplete} /> : 
+        <BrowserRouter>
             <div>
               <Navbar />
               <Routes>
@@ -27,7 +38,9 @@ function App() {
                 <Route path={"/MeetTheTeam"} element={<MeetTheTeam />} exact />     
               </Routes>
             </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      }
+      
   </div>
   );
 }
